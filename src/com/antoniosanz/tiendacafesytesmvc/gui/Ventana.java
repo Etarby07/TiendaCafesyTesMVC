@@ -34,5 +34,6 @@ public class Ventana {
     }
 
     private void initComponents() {
+        dlmBebidas = new DefaultListModel<Bebida>();
     }
 }
