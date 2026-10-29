@@ -1,0 +1,32 @@
+[
+  {
+    "pais": "Etiopía",
+    "region": "Yirgacheffe",
+    "proceso": "Lavado",
+    "notas": ["Jazmín", "Cítricos", "Té negro"]
+  },
+  {
+    "pais": "Colombia",
+    "region": "Huila",
+    "proceso": "Lavado",
+    "notas": ["Caramelo", "Manzana roja", "Chocolate con leche"]
+  },
+  {
+    "pais": "Kenia",
+    "region": "Nyeri",
+    "proceso": "Lavado doble",
+    "notas": ["Grosella negra", "Pomelo", "Cuerpo jugoso"]
+  },
+  {
+    "pais": "Costa Rica",
+    "region": "Tarrazú",
+    "proceso": "Miel (Honey)",
+    "notas": ["Miel", "Ciruela", "Frutos secos"]
+  },
+  {
+    "pais": "Brasil",
+    "region": "Cerrado Mineiro",
+    "proceso": "Natural",
+    "notas": ["Avellana", "Cacao", "Baja acidez"]
+  }
+]
