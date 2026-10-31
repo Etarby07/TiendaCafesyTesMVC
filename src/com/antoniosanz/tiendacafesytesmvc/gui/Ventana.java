@@ -22,7 +22,7 @@ public class Ventana {
 
     public Ventana() {
         JFrame frame = new JFrame("Ventana");
-        frame.setContentPane(new Ventana().panel1);
+        frame.setContentPane(panel1);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         initComponents();
