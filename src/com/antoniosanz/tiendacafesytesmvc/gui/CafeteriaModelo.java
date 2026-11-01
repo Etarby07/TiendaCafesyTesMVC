@@ -153,7 +153,7 @@ public class CafeteriaModelo {
 
 
     }
-
+    // *exportar en el commit
     public void importarXML() {
         // lo hacemos mañana tmb
     }
