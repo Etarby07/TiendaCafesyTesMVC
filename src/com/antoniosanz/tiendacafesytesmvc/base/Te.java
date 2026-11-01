@@ -13,7 +13,7 @@ public class Te extends Bebida{
     public Te(String nombre, String productor, int altitud, float notaCata, LocalDate fecha, String tipo, int tiempoInfusion) {
         super(nombre, productor, altitud, notaCata, fecha);
         this.tipo = tipo;
-        TiempoInfusion = tiempoInfusion;
+        this.tiempoInfusion = tiempoInfusion;
     }
 
     public String getTipo() {
@@ -25,11 +25,11 @@ public class Te extends Bebida{
     }
 
     public int getTiempoInfusion() {
-        return TiempoInfusion;
+        return tiempoInfusion;
     }
 
     public void setTiempoInfusion(int tiempoInfusion) {
-        TiempoInfusion = tiempoInfusion;
+        this.tiempoInfusion = tiempoInfusion;
     }
 
     @Override
