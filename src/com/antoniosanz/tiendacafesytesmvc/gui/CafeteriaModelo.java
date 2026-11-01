@@ -3,10 +3,8 @@ package com.antoniosanz.tiendacafesytesmvc.gui;
 import com.antoniosanz.tiendacafesytesmvc.base.Bebida;
 import com.antoniosanz.tiendacafesytesmvc.base.Cafe;
 import com.antoniosanz.tiendacafesytesmvc.base.Te;
-import org.w3c.dom.DOMImplementation;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Text;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -15,6 +13,7 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -154,7 +153,49 @@ public class CafeteriaModelo {
 
     }
     // *exportar en el commit
-    public void importarXML() {
-        // lo hacemos mañana tmb
+    public void importarXML(File fichero) throws ParserConfigurationException, IOException, SAXException {
+        listaBebidas = new ArrayList<Bebida>();
+        Cafe nuevoCafe = null;
+        Te nuevoTe = null;
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document documento = builder.parse(fichero);
+
+        NodeList listaElementos = documento.getElementsByTagName("*");
+
+        for (int i = 0; i < listaElementos.getLength(); i++) {
+            Element nodoBebida = (Element) listaElementos.item(i);
+
+            if (nodoBebida.getTagName().equals("Cafe")) {
+                nuevoCafe = new Cafe();
+                nuevoCafe.setNombre(nodoBebida.getChildNodes().item(0).getTextContent());
+                nuevoCafe.setProductor(nodoBebida.getChildNodes().item(1).getTextContent());
+                nuevoCafe.setAltitud(Integer.parseInt(nodoBebida.getChildNodes().item(2).getTextContent()));
+                nuevoCafe.setNotaCata(Float.parseFloat(nodoBebida.getChildNodes().item(3).getTextContent()));
+                nuevoCafe.setFecha(LocalDate.parse(nodoBebida.getChildNodes().item(4).getTextContent()));
+
+                nuevoCafe.setOrigen(nodoBebida.getChildNodes().item(5).getTextContent());
+                nuevoCafe.setProceso(nodoBebida.getChildNodes().item(6).getTextContent());
+                nuevoCafe.setVariedad(nodoBebida.getChildNodes().item(7).getTextContent());
+                nuevoCafe.setTipoPreparacion(Boolean.parseBoolean(nodoBebida.getChildNodes().item(8).getTextContent()));
+                nuevoCafe.setPeso(Double.parseDouble(nodoBebida.getChildNodes().item(9).getTextContent()));
+                nuevoCafe.setMolienda(nodoBebida.getChildNodes().item(10).getTextContent());
+
+                listaBebidas.add(nuevoCafe);
+            } else if (nodoBebida.getTagName().equals("Te")) {
+                nuevoTe = new Te();
+                nuevoTe.setNombre(nodoBebida.getChildNodes().item(0).getTextContent());
+                nuevoTe.setProductor(nodoBebida.getChildNodes().item(1).getTextContent());
+                nuevoTe.setAltitud(Integer.parseInt(nodoBebida.getChildNodes().item(2).getTextContent()));
+                nuevoTe.setNotaCata(Float.parseFloat(nodoBebida.getChildNodes().item(3).getTextContent()));
+                nuevoTe.setFecha(LocalDate.parse(nodoBebida.getChildNodes().item(4).getTextContent()));
+
+                nuevoTe.setTipo(nodoBebida.getChildNodes().item(5).getTextContent());
+                nuevoTe.setTiempoInfusion(Integer.parseInt(nodoBebida.getChildNodes().item(6).getTextContent()));
+
+                listaBebidas.add(nuevoTe);
+            }
+        }
     }
 }
