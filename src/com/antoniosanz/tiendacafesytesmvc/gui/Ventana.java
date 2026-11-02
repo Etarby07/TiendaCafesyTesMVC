@@ -15,6 +15,11 @@ public class Ventana {
     private JRadioButton filtroRadioButton;
     private JComboBox moliendasComboBox;
     private JComboBox origenesComboBox;
+    private JButton NuevoButton;
+    private JButton exportarButton;
+    private JButton importarButton;
+    private JButton cerrarButton;
+    private JList listaBebidas;
 
     public JFrame frame;
     public DefaultListModel<Bebida> dlmBebidas;
