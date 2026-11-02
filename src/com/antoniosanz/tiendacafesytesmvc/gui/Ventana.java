@@ -29,9 +29,10 @@ public class Ventana {
     public JPanel panelGifOverlay;
 
     public Ventana() {
-        JFrame frame = new JFrame("Ventana");
+        frame = new JFrame("Ventana");
         frame.setContentPane(panel1);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        frame.setLocationRelativeTo(null);
         frame.pack();
         initComponents();
         prepararGifOverlay();

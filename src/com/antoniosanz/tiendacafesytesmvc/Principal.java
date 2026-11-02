@@ -8,7 +8,7 @@ public class Principal {
     public static void main(String[] args) {
         Ventana vista = new Ventana();
         CafeteriaModelo modelo = new CafeteriaModelo();
-        CafeteriaControlador controlador = new CafeteriaControlador();
+        CafeteriaControlador controlador = new CafeteriaControlador(vista, modelo);
 
     }
 }
