@@ -59,5 +59,20 @@ public class Ventana {
         grupoPrep.add(expressoRadioButton);
         grupoPrep.add(filtroRadioButton);
         expressoRadioButton.setSelected(true); // para marcar tipoPrep de expresso por defecto, igual que el "checked" en html
+
+        // Opciones del desplegable de moliendas (sin json)
+        moliendasComboBox.addItem("Café en grano");
+        moliendasComboBox.addItem("Espresso");
+        moliendasComboBox.addItem("Cafetera Italiana");
+        moliendasComboBox.addItem("Métodos de filtro");
+        moliendasComboBox.addItem("Frenchpress");
+        moliendasComboBox.addItem("Cold Brew");
+
+        // Opciones del desplegable de orígenes (sin json)
+        origenesComboBox.addItem("Etiopía");
+        origenesComboBox.addItem("Colombia");
+        origenesComboBox.addItem("Kenia");
+        origenesComboBox.addItem("Costa Rica");
+        origenesComboBox.addItem("Brasil");
     }
 }
