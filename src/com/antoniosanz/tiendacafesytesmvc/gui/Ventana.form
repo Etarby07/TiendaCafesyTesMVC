@@ -58,7 +58,7 @@
           <forms/>
         </constraints>
         <properties>
-          <text value="cafeRadioButton"/>
+          <text value="Cafe"/>
         </properties>
       </component>
       <component id="c8083" class="javax.swing.JRadioButton" binding="teRadioButtonRadioButton" default-binding="true">
@@ -67,7 +67,7 @@
           <forms/>
         </constraints>
         <properties>
-          <text value="teRadioButton"/>
+          <text value="Te"/>
         </properties>
       </component>
       <component id="cae53" class="javax.swing.JLabel">
