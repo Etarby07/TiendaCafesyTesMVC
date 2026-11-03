@@ -63,6 +63,7 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
         vista.nuevoButton.addActionListener(listener);
         vista.importarButton.addActionListener(listener);
         vista.exportarButton.addActionListener(listener);
+        vista.cerrarButton.addActionListener(listener);
         vista.cafeRadioButtonRadioButton.addActionListener(listener);
         vista.teRadioButtonRadioButton.addActionListener(listener);
     }
@@ -88,7 +89,7 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
     private void guardarDatosConfiguracion() throws IOException {
         Properties configuracion = new Properties();
         configuracion.setProperty("ultimaRutaExportada",ultimaRutaExportada.getAbsolutePath());
-        configuracion.store(new PrintWriter("bebidas.conf"),"Datos configuracion vehiculos");
+        configuracion.store(new PrintWriter("bebidas.conf"),"Datos configuracion bebidas");
     }
 
 
