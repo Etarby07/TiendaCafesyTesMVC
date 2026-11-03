@@ -2,6 +2,7 @@ package com.antoniosanz.tiendacafesytesmvc.gui;
 
 import com.antoniosanz.tiendacafesytesmvc.base.Bebida;
 import com.github.lgooddatepicker.components.DatePicker;
+import com.google.gson.Gson;
 
 import javax.swing.*;
 
@@ -61,6 +62,7 @@ public class Ventana {
         expressoRadioButton.setSelected(true); // para marcar tipoPrep de expresso por defecto, igual que el "checked" en html
 
         // Opciones del desplegable de moliendas (sin json)
+        Gson gson = new Gson();
         moliendasComboBox.addItem("Café en grano");
         moliendasComboBox.addItem("Espresso");
         moliendasComboBox.addItem("Cafetera Italiana");
