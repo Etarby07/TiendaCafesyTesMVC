@@ -84,9 +84,12 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
 
 
     private void cargarDatosConfiguracion() throws IOException {
-        Properties configuracion = new Properties();
-        configuracion.load(new FileReader("bebidas.conf"));
-        ultimaRutaExportada=new File(configuracion.getProperty("ultimaRutaExportada"));
+        File archivoConf = new File("bebidas.conf");
+        if (archivoConf.exists()) {
+            Properties configuracion = new Properties();
+            configuracion.load(new FileReader(archivoConf));
+            ultimaRutaExportada=new File(configuracion.getProperty("ultimaRutaExportada"));
+        }
     }
 
     private void actualizarDatosConfiguracion(File ultimaRutaExportada) {
@@ -94,9 +97,11 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
     }
 
     private void guardarDatosConfiguracion() throws IOException {
-        Properties configuracion = new Properties();
-        configuracion.setProperty("ultimaRutaExportada",ultimaRutaExportada.getAbsolutePath());
-        configuracion.store(new PrintWriter("bebidas.conf"),"Datos configuracion bebidas");
+        if (ultimaRutaExportada != null) {
+            Properties configuracion = new Properties();
+            configuracion.setProperty("ultimaRutaExportada",ultimaRutaExportada.getAbsolutePath());
+            configuracion.store(new PrintWriter("bebidas.conf"),"Datos configuracion bebidas");
+        }
     }
 
 
