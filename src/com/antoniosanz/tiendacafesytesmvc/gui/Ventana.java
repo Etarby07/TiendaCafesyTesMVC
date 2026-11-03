@@ -5,6 +5,7 @@ import com.github.lgooddatepicker.components.DatePicker;
 import com.google.gson.Gson;
 
 import javax.swing.*;
+import java.io.InputStreamReader;
 
 public class Ventana {
     public JPanel panel1;
@@ -41,6 +42,7 @@ public class Ventana {
     }
 
     private void prepararGifOverlay() {
+       // lo intenté y no pude
     }
 
     private void initComponents() {
@@ -61,20 +63,35 @@ public class Ventana {
         grupoPrep.add(filtroRadioButton);
         expressoRadioButton.setSelected(true); // para marcar tipoPrep de expresso por defecto, igual que el "checked" en html
 
-        // Opciones del desplegable de moliendas (sin json)
-        Gson gson = new Gson();
-        moliendasComboBox.addItem("Café en grano");
-        moliendasComboBox.addItem("Espresso");
-        moliendasComboBox.addItem("Cafetera Italiana");
-        moliendasComboBox.addItem("Métodos de filtro");
-        moliendasComboBox.addItem("Frenchpress");
-        moliendasComboBox.addItem("Cold Brew");
+        try {
+            Gson gson = new Gson();
+            InputStreamReader inputStreamReader = new InputStreamReader(getClass().getResourceAsStream("/res/moliendas.json"));
+            String[] moliendas = gson.fromJson(inputStreamReader, String[].class);
+            for (String m : moliendas) {
+                moliendasComboBox.addItem(m);
+            }
+        } catch (Exception ex) {
+            moliendasComboBox.addItem("Café en grano");
+            moliendasComboBox.addItem("Espresso");
+            moliendasComboBox.addItem("Cafetera Italiana");
+            moliendasComboBox.addItem("Métodos de filtro");
+            moliendasComboBox.addItem("Frenchpress");
+            moliendasComboBox.addItem("Cold Brew");
+        }
 
-        // Opciones del desplegable de orígenes (sin json)
-        origenesComboBox.addItem("Etiopía");
-        origenesComboBox.addItem("Colombia");
-        origenesComboBox.addItem("Kenia");
-        origenesComboBox.addItem("Costa Rica");
-        origenesComboBox.addItem("Brasil");
+        try {
+            Gson gson = new Gson();
+            InputStreamReader inputStreamReader = new InputStreamReader(getClass().getResourceAsStream("/res/origenescafes.json"));
+            String[] origenes = gson.fromJson(inputStreamReader, String[].class);
+            for (String o : origenes) {
+                origenesComboBox.addItem(o);
+            }
+        } catch (Exception ex) {
+            origenesComboBox.addItem("Etiopía");
+            origenesComboBox.addItem("Colombia");
+            origenesComboBox.addItem("Kenia");
+            origenesComboBox.addItem("Costa Rica");
+            origenesComboBox.addItem("Brasil");
+        }
     }
 }

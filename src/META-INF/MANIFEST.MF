@@ -1,3 +1,6 @@
 Manifest-Version: 1.0
 Main-Class: com.antoniosanz.tiendacafesytesmvc.Principal
+Class-Path: gson-2.15.0.jar jgoodies-common-1.8.1.jar jgoodies-forms-1.8
+ .0.jar LGoodDatePicker-10.3.1.jar gson-2.15.0.jar jgoodies-forms-1.8.0.
+ jar jgoodies-common-1.8.1.jar LGoodDatePicker-10.3.1.jar
 
