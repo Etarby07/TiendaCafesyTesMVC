@@ -1,9 +1,14 @@
 package com.antoniosanz.tiendacafesytesmvc.gui;
 
 import com.antoniosanz.tiendacafesytesmvc.base.Bebida;
+import com.antoniosanz.tiendacafesytesmvc.util.Util;
+import org.xml.sax.SAXException;
 
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -95,7 +100,85 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        String actionCommand = e.getActionCommand();
 
+        switch (actionCommand) {
+            case "Nuevo":
+                if (hayCamposVacios()) {
+                    Util.mensajeError("Los siguientes campos no pueden " +
+                            "estar vacios: \nNombre\nProductor" +
+                            "\nFecha de tueste");
+                    break;
+                }
+                if (modelo.existeNombre(vista.nombreTxt.getText())) {
+                    Util.mensajeError("Ya existe una bebida con ese nombre");
+                    break;
+                }
+                if (vista.cafeRadioButtonRadioButton.isSelected()) {
+                    modelo.altaCafe(vista.nombreTxt.getText(),vista.productorTxt.getText(),
+                            (int) vista.altitudSpinner.getValue(),Float.parseFloat(vista.notaCata.getValue().toString()),
+                            vista.fechaDatePicker.getDate(),vista.origenesComboBox.getSelectedItem().toString(),"Lavado","Arábica",
+                            vista.expressoRadioButton.isSelected(), 250.0, vista.moliendasComboBox.getSelectedItem().toString());
+                } else {
+                    modelo.altaTe(vista.nombreTxt.getText(),vista.productorTxt.getText(),
+                            (int) vista.altitudSpinner.getValue(), Float.parseFloat(vista.notaCata.getValue().toString()),vista.fechaDatePicker.getDate(), "Te verde", 3);
+                }
+                limpiarCampos();
+                refrescar();
+                break;
+            case "Importar":
+                JFileChooser selectorFichero = Util.crearSelectorFichero(ultimaRutaExportada,
+                        "Archivos XML","xml");
+                int opt=selectorFichero.showOpenDialog(null);
+                if (opt==JFileChooser.APPROVE_OPTION) {
+                    try {
+                        modelo.importarXML(selectorFichero.getSelectedFile());
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (SAXException ex) {
+                        ex.printStackTrace();
+                    }
+                    refrescar();
+                }
+                break;
+            case "Exportar":
+                JFileChooser selectorFichero2 = Util.crearSelectorFichero(ultimaRutaExportada,
+                        "Archivos XML","xml");
+                int opt2=selectorFichero2.showSaveDialog(null);
+                if (opt2==JFileChooser.APPROVE_OPTION) {
+                    try {
+                        modelo.exportarXML(selectorFichero2.getSelectedFile());
+                        actualizarDatosConfiguracion(selectorFichero2.getSelectedFile());
+                    } catch (ParserConfigurationException ex) {
+                        ex.printStackTrace();
+                    } catch (TransformerException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+                break;
+            case "Cerrar":
+                cerrarAplicacion();
+                break;
+            case "Cafe":
+                vista.moliendasComboBox.setEnabled(true);
+                vista.origenesComboBox.setEnabled(true);
+                vista.expressoRadioButton.setEnabled(true);
+                vista.filtroRadioButton.setEnabled(true);
+                break;
+            case "Te":
+                vista.moliendasComboBox.setEnabled(false);
+                vista.origenesComboBox.setEnabled(false);
+                vista.expressoRadioButton.setEnabled(false);
+                vista.filtroRadioButton.setEnabled(false);
+                break;
+        }
+
+    }
+
+    private void cerrarAplicacion() {
+        // hacer con el metodo windowsClosing de vehiculos (doble metodo para cerrar ya que he añadido un btn como extra)
     }
 
     @Override
