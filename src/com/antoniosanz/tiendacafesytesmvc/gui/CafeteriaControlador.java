@@ -1,6 +1,8 @@
 package com.antoniosanz.tiendacafesytesmvc.gui;
 
 import com.antoniosanz.tiendacafesytesmvc.base.Bebida;
+import com.antoniosanz.tiendacafesytesmvc.base.Cafe;
+import com.antoniosanz.tiendacafesytesmvc.base.Te;
 import com.antoniosanz.tiendacafesytesmvc.util.Util;
 import org.xml.sax.SAXException;
 
@@ -178,7 +180,15 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
     }
 
     private void cerrarAplicacion() {
-        // hacer con el metodo windowsClosing de vehiculos (doble metodo para cerrar ya que he añadido un btn como extra)
+        int resp= Util.mensajeConfirmacion("Deseas cerrar la ventana","Salir");
+        if (resp==JOptionPane.OK_OPTION) {
+            try {
+                guardarDatosConfiguracion();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.exit(0);
+        }
     }
 
     @Override
@@ -188,7 +198,7 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
 
     @Override
     public void windowClosing(WindowEvent e) {
-
+        cerrarAplicacion();
     }
 
     @Override
@@ -218,6 +228,29 @@ public class CafeteriaControlador implements ActionListener, ListSelectionListen
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        if (!e.getValueIsAdjusting()) {
+            Bebida bebidaSeleccionada = (Bebida) vista.listaBebidas.getSelectedValue();
+            if (bebidaSeleccionada != null) {
+                vista.nombreTxt.setText(bebidaSeleccionada.getNombre());
+                vista.productorTxt.setText(bebidaSeleccionada.getProductor());
+                vista.altitudSpinner.setValue(bebidaSeleccionada.getAltitud());
+                vista.notaCata.setValue(bebidaSeleccionada.getNotaCata());
+                vista.fechaDatePicker.setDate(bebidaSeleccionada.getFecha());
 
+                if (bebidaSeleccionada instanceof Cafe) {
+                    vista.cafeRadioButtonRadioButton.doClick();
+                    Cafe cafe = (Cafe) bebidaSeleccionada;
+                    vista.origenesComboBox.setSelectedItem(cafe.getOrigen());
+                    vista.moliendasComboBox.setSelectedItem(cafe.getMolienda());
+                    if (cafe.isTipoPreparacion()) {
+                        vista.expressoRadioButton.setSelected(true);
+                    } else {
+                        vista.filtroRadioButton.setSelected(true);
+                    }
+                } else if (bebidaSeleccionada instanceof Te) {
+                    vista.teRadioButtonRadioButton.doClick();
+                }
+            }
+        }
     }
 }
