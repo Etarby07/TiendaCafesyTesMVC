@@ -240,7 +240,7 @@
         </constraints>
         <properties/>
       </component>
-      <component id="e4cc3" class="javax.swing.JButton" binding="NuevoButton">
+      <component id="e4cc3" class="javax.swing.JButton" binding="nuevoButton">
         <constraints>
           <grid row="24" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
           <forms/>

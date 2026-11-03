@@ -17,7 +17,7 @@ public class Ventana {
     public JRadioButton filtroRadioButton;
     public JComboBox moliendasComboBox;
     public JComboBox origenesComboBox;
-    public JButton NuevoButton;
+    public JButton nuevoButton;
     public JButton exportarButton;
     public JButton importarButton;
     public JButton cerrarButton;
